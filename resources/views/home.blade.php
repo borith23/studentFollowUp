@@ -34,7 +34,7 @@
                   
                   <!-- Modal body -->
                   <div class="modal-body">
-                    <form>
+                    <form  action="{{route('students.store')}}" method="POST">
                       <div class="form-row">
                         <div class="col">
                           <input type="text" class="form-control" placeholder="First name">
@@ -62,6 +62,9 @@
                             <option>1</option>                            
                           </select>
                         </div>
+                        <div class="form-group col-md-6">
+                          <textarea name="description" id="" cols="63" rows="5" placeholder="Description..."></textarea>
+                        </div>
                       </div>  
                       <input type="file" class="form-group">
                     </form>
@@ -69,7 +72,7 @@
                   
                   <!-- Modal footer -->
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Submit Form</button>
+                    <button type="submit" class="btn btn-primary" data-dismiss="modal">Submit Form</button>
                   </div>
                   
                 </div>
@@ -83,6 +86,7 @@
                     <th>Firstname</th>
                     <th>Lastname</th>
                     <th>Class</th>
+                    <th>Description</th>
                     <th>Active Follow UP</th>
                     <th>Picture</th>
                     <th>Action</th>
@@ -95,6 +99,7 @@
                         <td>{{ $item->firstName}}</td>
                         <td>{{ $item->lastName}}</td>
                         <td>{{ $item->class}}</td>
+                        <td>{{ $item->description}}</td>
                         <td>{{ $item->activeFollowup}}</td>
                         <td>{{ $item->picture}}</td>
                         <td>
@@ -111,7 +116,8 @@
                                     </div>
                                     <!-- Modal body -->
                                     <div class="modal-body">
-                                      <form>
+                                    <form>
+                                      @csrf
                                         <div class="form-row">
                                           <div class="col">
                                             <input type="text" class="form-control" placeholder="First name">
@@ -146,7 +152,7 @@
                                     
                                     <!-- Modal footer -->
                                     <div class="modal-footer">
-                                      <button type="button" class="btn btn-success" data-dismiss="modal">Edit Student</button>
+                                      <button type="submit" class="btn btn-success" data-dismiss="modal">Edit Student</button>
                                     </div>
                                     
                                   </div>

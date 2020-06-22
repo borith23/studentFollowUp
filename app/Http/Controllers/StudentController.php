@@ -24,7 +24,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        return view('student.home');
     }
 
     /**
@@ -35,7 +35,15 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $student = new Student;
+        $student->firstname = $request->get('firstname');
+        $student->lastname = $request->get('lastname');
+        $student->class = $request->get('class');
+        $student->description = $request->get('description');
+        $student->picture = $request->get('picture');
+        $student->activeFollowup = $request->get('activefollowup');
+        $student->save();
+        return redirect('home');
     }
 
     /**
