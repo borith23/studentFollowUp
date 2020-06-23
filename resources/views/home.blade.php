@@ -35,17 +35,18 @@
                   <!-- Modal body -->
                   <div class="modal-body">
                     <form  action="{{route('students.store')}}" method="POST">
+                      @csrf
                       <div class="form-row">
                         <div class="col">
-                          <input type="text" class="form-control" placeholder="First name">
+                          <input type="text" class="form-control" name="firstname" placeholder="First name">
                         </div>
                         <div class="col">
-                          <input type="text" class="form-control" placeholder="Last name">
+                          <input type="text" class="form-control" name="lastname" placeholder="Last name">
                         </div>
                       </div> <br>
                       <div class="form-row">
                         <div class="form-group col-md-6">
-                          <select id="inputState" class="form-control">
+                          <select id="inputState" name="class" class="form-control">
                             <option selected>Class</option>
                             <option>WEP-A</option>
                             <option>WEP-B</option>
@@ -56,17 +57,18 @@
                           </select>
                         </div>
                         <div class="form-group col-md-6">
-                          <select id="inputState" class="form-control">
+                          <select id="inputState" name="activeFollowup" class="form-control">
                             <option selected>ActiveFollowUp</option>
                             <option>0</option>                            
                             <option>1</option>                            
                           </select>
                         </div>
+
                         <div class="form-group col-md-6">
                           <textarea name="description" id="" cols="63" rows="5" placeholder="Description..."></textarea>
                         </div>
                       </div>  
-                      <input type="file" class="form-group">
+                      <input type="file" id="picture" class="form-group" name="image">
                     </form>
                   </div>
                   

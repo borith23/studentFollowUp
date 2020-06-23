@@ -40,9 +40,15 @@ class StudentController extends Controller
         $student->lastname = $request->get('lastname');
         $student->class = $request->get('class');
         $student->description = $request->get('description');
-        $student->picture = $request->get('picture');
         $student->activeFollowup = $request->get('activefollowup');
-        $student->save();
+        if ($request->hasfile('image')){
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time(). ".".$extension;
+            $file->move('img/', $filename);
+            $student->picture = $filename;
+            $student->save();
+        }
         return redirect('home');
     }
 
