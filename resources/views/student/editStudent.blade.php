@@ -16,8 +16,9 @@
                 <div class="card">
                     <div class="card-header text-center text-info"><h4>Edit Student</h4></div>
                     <div class="card-body">
-                        <form action="{{route('students.update',$student->id)}}" method="PUT" enctype="multipart/form-data">
-                            @csrf
+                        <form action="{{route('students.update',$student->id)}}" method="POST" enctype="multipart/form-data">
+                          {{csrf_field()}}
+                          {{method_field('PUT')}}
                             <div class="form-group">
                                 <label for="fname">firstName:</label>
                                 <input type="text" class="form-control" placeholder="FirstName" name="fname" value="{{$student->firstName}}">
@@ -28,14 +29,14 @@
                               </div>
                               <div class="form-group">
                                 <label for="class">class:</label>
-                                <select name="class" id="class" class="form-control" value="{{$student->class}}">
-                                  <option value="WEP2020-A">WEP2020-A</option>
-                                  <option value="WEP2020-B">WEP2020-B</option>
-                                  <option value="SNA2020">SNA2020</option>
-                                  <option value="2021-A">2021-A</option>
-                                  <option value="2021-B">2021-B</option>
-                                  <option value="2021-C">2021-C</option>
-                              </select>
+                                <select name="class" class="form-control">
+                                  <option value="WEP-A" {{($student->class == "WEP-A") ? 'selected' : ''}}>WEP-A</option>
+                                  <option value="WEP-B" {{($student->class == "WEP-B") ? 'selected' : ''}}>WEP-B</option>
+                                  <option value="SNA" {{($student->class == "SNA") ? 'selected' : ''}}>SNA</option>
+                                  <option value="Class-A" {{($student->class == "Class-A") ? 'selected' : ''}}>Class-A</option>
+                                  <option value="Class-B" {{($student->class == "Class-B") ? 'selected' : ''}}>Class-B</option>
+                                  <option value="Class-C" {{($student->class == "Class-C") ? 'selected' : ''}}>Class-C</option>
+                                </select>
                               </div>
                               <div class="form-group">
                                 <label for="description">Description:</label>

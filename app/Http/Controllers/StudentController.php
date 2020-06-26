@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+use Auth;
+use Image;
 use App\Student;
 use Illuminate\Http\Request;
+
 
 class StudentController extends Controller
 {
@@ -43,17 +47,6 @@ class StudentController extends Controller
         $student->class = $request->get('class');
         $student->description = $request->get('description');
         if($request->hasFile('pic')){
-            // $image = $request->file('pic');
-            // $filename = time() . '.' . $image->getClientOriginalExtension();
-            // Image::make($image)->save( public_path('img/' . $filename ) );
-            // $student->picture = $filename;
-            // dd($student->picture);
-
-            // $file = $request->file('pic');
-            // $extension = $file->getClientOriginalExtension();
-            // $file->move('uploads/students',$filename);
-            // $student->avatar = $filename;
-
             $file = $request->file('pic');
             $extension = $file->getClientOriginalExtension();
             $filename = time(). ".".$extension;
@@ -72,9 +65,10 @@ class StudentController extends Controller
      * @param  \App\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function show(Student $student)
+    public function show($id)
     {
-        //
+        $student = Student::find($id);
+        return view('student.viewStudent', compact('student'));
     }
 
     /**
@@ -83,9 +77,9 @@ class StudentController extends Controller
      * @param  \App\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function edit(Student $student)
+    public function edit($id)
     {
-        // $student = Student::find($id);
+        $student = Student::find($id);
         return view('student.editStudent',compact('student'));
     }
 
@@ -105,17 +99,15 @@ class StudentController extends Controller
         $students-> lastName = $request->get('lname');
         $students-> class = $request->get('class');
         $students-> description = $request->get('description');
-        if($request->picture == null){
-            $students -> picture = "student.png";
-        }else {
-            request()->validate([
-                'picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ]);
-            $imageName = time().'.'.request()->picture->getClientOriginalExtension();
-            request()->picture->move(public_path('uploads/students'), $imageName);
-            $students -> picture = $imageName;
+        if ($request->hasfile('pic')){
+            $file = $request->file('pic');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time(). ".".$extension;
+            $file->move('uploads/students', $filename);
+            $student->picture = $filename;
+            $student->save();
         }
-        $students->user_id = $users->id;
+        // $students->user_id = $users->id;
         $students->user_id = $request->get('user_id');
         $students->save();
         return redirect('home');
@@ -131,4 +123,6 @@ class StudentController extends Controller
     {
         //
     }
+
+     
 }

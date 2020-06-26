@@ -55,6 +55,7 @@
                         <td><img class="mx-auto d-block" src="{{asset('uploads/students'.$item->picture)}}" style="width: 50px;, height:50px;"></td>                        
                         <td>
                             <a href="{{route('students.edit',$item->id)}}" class="fas fa-edit"></a>
+                            <a href="{{route('students.show',$item->id)}}" class="fas fa-eye text-success"></a>
                             {{-- <form action="#" method="POST">
                                 @csrf
                                 @method('DELETE')

@@ -29,12 +29,13 @@
                               <div class="form-group">
                                 <label for="class">class:</label>
                                 <select name="class" id="class" class="form-control">
-                                  <option value="WEP2020-A">WEP2020-A</option>
-                                  <option value="WEP2020-B">WEP2020-B</option>
-                                  <option value="SNA2020">SNA2020</option>
-                                  <option value="2021-A">2021-A</option>
-                                  <option value="2021-B">2021-B</option>
-                                  <option value="2021-C">2021-C</option>
+                                  <option selected disabled>Class</option>
+                                  <option value="WEP-A">WEP-A</option>
+                                  <option value="WEP-B">WEP-B</option>
+                                  <option value="SNA">SNA</option>
+                                  <option value="Class-A">Class-A</option>
+                                  <option value="Class-B">Class-B</option>
+                                  <option value="Class-C">Class-C</option>
                               </select>
                               </div>
                               <div class="form-group">
@@ -54,6 +55,7 @@
                               <div class="form-group">
                                 <label for="tutor">Tutor: </label>
                                 <select name="user_id" id="user_id" class="form-control">
+                                    <option selected disabled>Turtor</option>
                                     <option value="1">Admin</option>
                                     <option value="2">Normal</option>
                                 </select>
