@@ -23,5 +23,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('students','StudentController');
 Route::post('addcomments/{id}', 'CommentController@addComment')->name('addComments');
-// Route::get('deletas/{id}', 'CommentController@delete')->name('deleteComments');
-// Route::put('updates/{id}', 'CommentController@update')->name('updateComments');
+Route::put('updates/{id}', 'CommentController@update')->name('updateComments');
+Route::get('deletas/{id}', 'CommentController@delete')->name('deleteComments');

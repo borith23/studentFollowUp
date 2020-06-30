@@ -19,30 +19,7 @@
                             <h4 class="text-success">View Detail</h4>
                           </div>
                           <div class="card-body">
-                              {{-- <img class="mx-auto d-block" src="{{asset('img/'.$student->picture)}}"><br>
-                              <h4>{{$student->firstName." ".$student->lastName}} - {{$student->class}}</span></h4>
-                              <h5>Description:</h5>
-                              <p>{{$student->description}}</p>
-                              @if($student->user_id != "")
-                              <p>Tutor By: {{$student->user['firstName']." ".$student->user['lastName']}}</p>
-                              @else
-                              <p>Tutor By: No</p>
-                              @endif
-      
-                              <form action="{{route('addComment', $student->id)}}" method="post">
-                              @csrf
-                                  <div class="form-group">
-                                      <label for="comment">{{ __('Comment') }}</label>
-                                      <textarea class="form-control" placeholder="Comment" name="comment" required></textarea>
-                                  </div>
-                                  <button type="submit" class="btn btn-primary">Post</button>
-                              </form><br>
-                              @foreach($comments as $comment)
-                                  <h5>{{$comment->user['firstName']}}</h5>
-                                  <p>{{$comment->comment}}</p>
-                                  <a href="{{route('comments.edit', $comment->id)}}">Edit</a>
-                                  <hr>
-                              @endforeach --}}
+                              
                               <div class="hovereffect">
                              
                                 <img class="mx-auto d-block" src="{{asset('uploads/students'.$student->picture)}}"><br>
@@ -72,26 +49,58 @@
                                 
                               </table>
                               <div class="container">
-                                <form action="" method="POST"> 
-                                  {{-- {{route('addComments',$student->id)}} --}}
+                                <form action="{{route('addComments',$student->id)}}" method="POST"> 
+                                  
                                   @csrf
                                     <textarea name="comment" class="form-control"></textarea><br>
                                     <button class="btn btn-success" type="submit">Post</button>
                                 </form> <br><br>
-                                {{-- <table class="table table-stripped">
+                                <table class="table table-stripped">
                                   <thead>
                                     <tr>
                                       <th>Comments</th>
-                                      <th>Comments From User Name</th>
+                                      <th>User</th>
                                       <th>Action</th>
                                     </tr>
                                   </thead>
                                   <tbody>
-                                      
+                                    @foreach ($student->comments as $item)
+                                    <tr>
+                                    <td>{{$item->comment}}</td>
+                                    <td>{{$item->user->firstName}}</td>
+                                      <td>
+                                        <button type="button" class="btn bg-success text-white" style='font-size:15px' data-toggle="modal" data-target="#editComment{{$item->id}}">edit</button>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="editComment{{$item->id}}" role="dialog">
+                                          <div class="modal-dialog">
+                                          
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                              <div class="modal-header bg bg-primary">
+                                                  <h4 class="modal-title" style="">Edit Comment</h4>
+                                              </div>
+                                              <div class="modal-body">
+                                                <form action="{{route('updateComments',$item->id)}}" method="POST">
+                                                  @csrf
+                                                  @method('PUT')
+                                                    <textarea name="comment" class="form-control">{{$item->comment}}</textarea><br>
+                                                    <button class="btn btn-success" type="submit">Edit</button>
+                                                    <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Close</button>
+                                                </form>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        
+                                        <button type="submit" href="{{route('deleteComments',$item->id)}}" class="btn btn-danger">Delete</button>
+                                      </td>
+                                    </tr>
+                                @endforeach
                                   </tbody>  
-                                </table> --}}
+                                </table>
                               </div>
-                              <a href="{{route('home')}}" class="btn btn-danger float-right">Go Back</a>
+                              <a href="{{route('home')}}" class="btn btn-success float-right">Go Back</a>
+                              
                           </div>
                       </div>
                   </div>

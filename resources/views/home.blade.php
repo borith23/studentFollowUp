@@ -56,11 +56,7 @@
                         <td>
                             <a href="{{route('students.edit',$item->id)}}" class="fas fa-edit"></a>
                             <a href="{{route('students.show',$item->id)}}" class="fas fa-eye text-success"></a>
-                            {{-- <form action="#" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" onclick="return confirm('Are you sure to delete?')">Delete</button>
-                            </form> --}}
+                            
                         </td>
                     </tr>
                 @endforeach
